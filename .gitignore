@@ -1,3 +1,9 @@
 *.o
 test
 _ot/
+x.c*
+
+testIHash
+testPair
+testMemHashMapBucket
+testMemHashMap
