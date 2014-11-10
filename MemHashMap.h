@@ -19,17 +19,17 @@ public:
 	MemHashMap(unsigned int capacity, IHash *hash);
 	virtual ~MemHashMap();
 
-	int exists(const char *key);
-	Pair *get(const char *key);
+	int exists(const char *key) const;
+	const Pair *get(const char *key) const;
 	bool put(Pair *p);
 	bool remove(const char *key);
-	unsigned int count();
+	unsigned int count() const;
 
 protected:
-	virtual unsigned int hash(const char *key);
+	virtual unsigned int hash(const char *key) const;
 
 private:
-	ArrayMap *_getBucketForKey(const char *key);
+	ArrayMap *_getBucketForKey(const char *key) const;
 
 };
 

@@ -32,12 +32,12 @@ MemHashMap::~MemHashMap(){
 }
 
 
-unsigned int MemHashMap::hash(const char *key){
+unsigned int MemHashMap::hash(const char *key) const{
 	return _hash->calculate(key);
 }
 
 
-ArrayMap *MemHashMap::_getBucketForKey(const char *key){
+ArrayMap *MemHashMap::_getBucketForKey(const char *key) const{
 	if (key == NULL)
 		return NULL;
 
@@ -51,7 +51,7 @@ ArrayMap *MemHashMap::_getBucketForKey(const char *key){
 }
 
 
-int MemHashMap::exists(const char *key){
+int MemHashMap::exists(const char *key) const{
 	// this is handled by next function too...
 	if (key == NULL)
 		return 0;
@@ -61,13 +61,13 @@ int MemHashMap::exists(const char *key){
 	if (bucket == NULL)
 		return 0;
 
-	Pair *pair = bucket->getPair(key);
+	const Pair *pair = bucket->getPair(key);
 
 	return pair == NULL ? 0 : 1;
 }
 
 
-Pair *MemHashMap::get(const char *key){
+const Pair *MemHashMap::get(const char *key) const{
 	if (key == NULL)
 		return NULL;
 
@@ -80,7 +80,7 @@ Pair *MemHashMap::get(const char *key){
 }
 
 
-unsigned int MemHashMap::count(){
+unsigned int MemHashMap::count() const{
 	if (_capacity == 0)
 		return 0;
 

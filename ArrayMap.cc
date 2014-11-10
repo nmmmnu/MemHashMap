@@ -21,7 +21,7 @@ unsigned int ArrayMap::_getPairID(const char *key){
 }
 
 
-Pair *ArrayMap::getPair(const char *key){
+const Pair *ArrayMap::getPair(const char *key){
 	unsigned int pos = _getPairID(key);
 
 	if (pos)

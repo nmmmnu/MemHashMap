@@ -13,14 +13,14 @@ public:
 	Pair(const char *key, const char *value);
 	virtual ~Pair();
 
-	bool operator == (const char *s);
+	bool operator == (const char *s) const;
 
-	bool equals(const char *s);
+	bool equals(const char *s) const;
 
-	virtual bool valid();
+	virtual bool valid() const;
 
 public:
-	void print(const bool pretty = false);
+	void print(const bool pretty = false) const;
 
 private:
 	static char *_cloneStr(const char *s);

@@ -28,12 +28,12 @@ ExpiresPair::~ExpiresPair(){
 
 
 // ExpiresPair must be valid Pair and not expired.
-bool ExpiresPair::valid(){
+bool ExpiresPair::valid() const{
 	return Pair::valid() && (! expired() );
 }
 
 
-bool ExpiresPair::expired(){
+bool ExpiresPair::expired() const{
 	//printf("%ld %ld %ld %ld", created, expires, created + expires * MICRO_TIME_MULTIPLE,  _now());
 
 	if (expires)

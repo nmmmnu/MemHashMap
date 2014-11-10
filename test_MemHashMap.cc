@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
 	}
 
 	const char *key = i2a(MAX - 5, buffer);
-	Pair *p = hm->get(key);
+	const Pair *p = hm->get(key);
 
 	const char *keyr = i2a(MAX / 2, buffer2);
 

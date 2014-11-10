@@ -10,7 +10,7 @@ private:
 	Pair **_pairs; // array of Pair*
 
 public:
-	Pair *getPair(const char *key);
+	const Pair *getPair(const char *key);
 	bool putPair(Pair *pair);
 	bool removePair(const char *key);
 	unsigned int getPairCount();

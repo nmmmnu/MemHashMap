@@ -30,23 +30,23 @@ Pair::~Pair(){
 }
 
 
-bool Pair::equals(const char *s){
+bool Pair::equals(const char *s) const{
 	return ! strcmp(this->key, s);
 };
 
 
-bool Pair::operator == (const char *s){
+bool Pair::operator == (const char *s) const{
 	return equals(s);
 }
 
 // For the moment validity is simple,
 // both key and value must be not NULL.
-bool Pair::valid(){
+bool Pair::valid() const{
 	return key != NULL && value != NULL;
 }
 
 
-void Pair::print(const bool pretty /* = 0 */){
+void Pair::print(const bool pretty /* = 0 */) const{
 	const char *mask;
 
 	if (pretty){

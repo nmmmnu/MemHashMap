@@ -14,9 +14,9 @@ public:
 	ExpiresPair(const char *key, const char *value, unsigned long int expires = 0);
 	virtual ~ExpiresPair();
 
-	virtual bool valid();
+	virtual bool valid() const;
 
-	bool expired();
+	bool expired() const;
 
 private:
 	static unsigned long int _now();

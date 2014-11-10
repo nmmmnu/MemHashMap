@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
 	printf("Test getPairCount %s\n", b->getPairCount() == MAX - 3 ? "OK" : "Fail");
 
 
-	Pair *p = b->getPair(key);
+	const Pair *p = b->getPair(key);
 
 	if (p == NULL){
 		printf("NULL returned, halt\n");
