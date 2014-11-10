@@ -15,10 +15,10 @@ public:
 	bool removePair(const char *key);
 	unsigned int getPairCount();
 
-public: /* for now */
-	bool putPair(const char *key, const char *value);
-
 	void printPairs(const unsigned int cnt = 0);
+
+protected: /* to be removed */
+	bool putPair(const char *key, const char *value);
 
 private:
 	unsigned int _getPairID(const char *key);

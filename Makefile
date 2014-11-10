@@ -36,7 +36,7 @@ Pair.o: Pair.cc Pair.h
 test_ArrayMap: test_ArrayMap.o ArrayMap.o Pair.o
 	$(LINK) test_ArrayMap test_ArrayMap.o ArrayMap.o Pair.o
 
-test_ArrayMap.o: test_ArrayMap.cc ArrayMap.h
+test_ArrayMap.o: test_ArrayMap.cc ArrayMap.h Pair.h
 	$(CC) test_ArrayMap.cc
 
 ArrayMap.o: ArrayMap.cc ArrayMap.h Pair.h

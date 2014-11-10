@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 	const char *val = "hello world";
 
 	// put duplicate
-	b->putPair(key, val);
+	b->putPair(new Pair(key, val));
 
 	b->removePair("0");
 	b->removePair("10");

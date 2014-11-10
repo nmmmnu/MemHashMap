@@ -4,6 +4,7 @@
 #include "ArrayMap.h"
 
 #include "IHash.h"
+#include "Pair.h"
 
 #include <stdlib.h>
 
@@ -18,13 +19,14 @@ public:
 	MemHashMap(unsigned int capacity, IHash *hash);
 	virtual ~MemHashMap();
 
-	virtual unsigned int hash(const char *key);
-
 	int exists(const char *key);
-	const char *get(const char *key);
-	bool put(const char *key, const char *value);
+	Pair *get(const char *key);
+	bool put(Pair *p);
 	bool remove(const char *key);
 	unsigned int count();
+
+protected:
+	virtual unsigned int hash(const char *key);
 
 private:
 	ArrayMap *_getBucketForKey(const char *key);

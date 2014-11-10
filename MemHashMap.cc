@@ -67,7 +67,7 @@ int MemHashMap::exists(const char *key){
 }
 
 
-const char *MemHashMap::get(const char *key){
+Pair *MemHashMap::get(const char *key){
 	if (key == NULL)
 		return NULL;
 
@@ -76,9 +76,7 @@ const char *MemHashMap::get(const char *key){
 	if (bucket == NULL)
 		return NULL;
 
-	Pair *pair = bucket->getPair(key);
-
-	return pair->value;
+	return bucket->getPair(key);
 }
 
 
@@ -101,13 +99,18 @@ unsigned int MemHashMap::count(){
 
 
 
-bool MemHashMap::put(const char *key, const char *value){
-	if (key == NULL || value == NULL)
+bool MemHashMap::put(Pair *pair){
+	if (pair == NULL)
 		return 0;
+
+	if (! pair->valid() )
+		return 0;
+
+	const char *key = pair->key;
 
 	ArrayMap *bucket = _getBucketForKey(key);
 
-	return bucket->putPair(new Pair(key, value));
+	return bucket->putPair(pair);
 }
 
 

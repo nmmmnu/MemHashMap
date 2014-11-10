@@ -3,11 +3,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/time.h>
 
+#define MICRO_TIME_MULTIPLE 1000 * 1000
 
-Pair::Pair(const char *key, const char *value){
-	this->key   = _cloneStr(key);
-	this->value = _cloneStr(value);
+Pair::Pair(const char *key, const char *value, unsigned long int expires /* = 0 */){
+	this->key     = _cloneStr(key);
+	this->value   = _cloneStr(value);
+	this->created = _now();
+	this->expires = expires;
 }
 
 
@@ -17,7 +21,7 @@ Pair::~Pair(){
 }
 
 
-char *Pair::_cloneStr(const char *src){
+/* static */ char *Pair::_cloneStr(const char *src){
 	if (src == NULL)
 		return NULL;
 
@@ -28,6 +32,15 @@ char *Pair::_cloneStr(const char *src){
 	strncpy(dest, src, len + 1);
 
 	return dest;
+}
+
+
+/* static */ unsigned long int Pair::_now(){
+	struct timeval tv;
+
+	gettimeofday(&tv,NULL);
+
+	return tv.tv_sec * MICRO_TIME_MULTIPLE + tv.tv_usec;
 }
 
 
@@ -42,8 +55,17 @@ bool Pair::operator == (const char *s){
 
 // For the moment validity is simple,
 // both key and value must be not NULL.
-int Pair::valid(){
-	return key != NULL && value != NULL;
+bool Pair::valid(){
+	return key != NULL && value != NULL && (! expired() );
+}
+
+bool Pair::expired(){
+	//printf("%ld %ld %ld %ld", created, expires, created + expires * MICRO_TIME_MULTIPLE,  _now());
+
+	if (expires)
+		return created + expires * MICRO_TIME_MULTIPLE < _now();
+
+	return false;
 }
 
 void Pair::print(const bool pretty /* = 0 */){
