@@ -1,5 +1,5 @@
-#ifndef _PAIR_H_
-#define _PAIR_H_
+#ifndef _PAIR_H
+#define _PAIR_H
 
 
 class Pair {
@@ -10,23 +10,20 @@ public:
 	unsigned long int expires;
 
 public:
-	Pair(const char *key, const char *value, unsigned long int expires = 0);
+	Pair(const char *key, const char *value);
 	virtual ~Pair();
 
 	bool operator == (const char *s);
 
 	bool equals(const char *s);
 
-	bool valid();
-
-	bool expired();
+	virtual bool valid();
 
 public:
 	void print(const bool pretty = false);
 
 private:
 	static char *_cloneStr(const char *s);
-	static unsigned long int _now();
 
 };
 

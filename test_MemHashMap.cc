@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 	hm->remove(keyr);
 
 
-	printf(TEST_FORMAT, "Test get",		strcmp(key, p->value) == 0		? "OK" : "Fail");
+	printf(TEST_FORMAT, "Test get",		strcmp(key, p->value) == 0	? "OK" : "Fail");
 	printf(TEST_FORMAT, "Test exists",	hm->exists(key)			? "OK" : "Fail");
 	printf(TEST_FORMAT, "Test ! exists",	! hm->exists(keyr)		? "OK" : "Fail");
 	printf(TEST_FORMAT, "Test count",	hm->count() == MAX - 1		? "OK" : "Fail");

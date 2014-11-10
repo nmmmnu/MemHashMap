@@ -22,14 +22,17 @@ DJBHash.o: DJBHash.cc DJBHash.h IHash.h
 	$(CC) DJBHash.cc
 
 
-test_Pair: test_Pair.o Pair.o
-	$(LINK) test_Pair test_Pair.o Pair.o
+test_Pair: test_Pair.o Pair.o ExpiresPair.o
+	$(LINK) test_Pair test_Pair.o ExpiresPair.o Pair.o
 
-test_Pair.o: test_Pair.cc Pair.h
+test_Pair.o: test_Pair.cc ExpiresPair.h Pair.h
 	$(CC) test_Pair.cc
 
 Pair.o: Pair.cc Pair.h
 	$(CC) Pair.cc
+
+ExpiresPair.o: ExpiresPair.cc ExpiresPair.h Pair.h
+	$(CC) ExpiresPair.cc
 
 
 

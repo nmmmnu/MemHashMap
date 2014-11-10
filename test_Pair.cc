@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#include "Pair.h"
+#include "ExpiresPair.h"
 
 #define KEY "name"
 
@@ -14,7 +14,7 @@ int main(){
 
 	Pair *p  = new Pair(key, "Niki");
 	Pair *p1 = new Pair(key, NULL);
-	Pair *p2 = new Pair("a", "b", 1);
+	Pair *p2 = new ExpiresPair("a", "b", 1);
 
 	key[0] = 'M';
 

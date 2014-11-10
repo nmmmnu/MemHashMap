@@ -3,15 +3,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys/time.h>
 
-#define MICRO_TIME_MULTIPLE 1000 * 1000
-
-Pair::Pair(const char *key, const char *value, unsigned long int expires /* = 0 */){
+Pair::Pair(const char *key, const char *value){
 	this->key     = _cloneStr(key);
 	this->value   = _cloneStr(value);
-	this->created = _now();
-	this->expires = expires;
 }
 
 
@@ -35,15 +30,6 @@ Pair::~Pair(){
 }
 
 
-/* static */ unsigned long int Pair::_now(){
-	struct timeval tv;
-
-	gettimeofday(&tv,NULL);
-
-	return tv.tv_sec * MICRO_TIME_MULTIPLE + tv.tv_usec;
-}
-
-
 bool Pair::equals(const char *s){
 	return ! strcmp(this->key, s);
 };
@@ -56,17 +42,9 @@ bool Pair::operator == (const char *s){
 // For the moment validity is simple,
 // both key and value must be not NULL.
 bool Pair::valid(){
-	return key != NULL && value != NULL && (! expired() );
+	return key != NULL && value != NULL;
 }
 
-bool Pair::expired(){
-	//printf("%ld %ld %ld %ld", created, expires, created + expires * MICRO_TIME_MULTIPLE,  _now());
-
-	if (expires)
-		return created + expires * MICRO_TIME_MULTIPLE < _now();
-
-	return false;
-}
 
 void Pair::print(const bool pretty /* = 0 */){
 	const char *mask;
