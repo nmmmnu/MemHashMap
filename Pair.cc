@@ -6,8 +6,8 @@
 
 
 Pair::Pair(const char *key, const char *value){
-	this->key   = cloneStr(key);
-	this->value = cloneStr(value);
+	this->key   = _cloneStr(key);
+	this->value = _cloneStr(value);
 }
 
 
@@ -17,7 +17,7 @@ Pair::~Pair(){
 }
 
 
-char *Pair::cloneStr(const char *src){
+char *Pair::_cloneStr(const char *src){
 	if (src == NULL)
 		return NULL;
 

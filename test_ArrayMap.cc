@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "MemHashMapBucket.h"
+#include "ArrayMap.h"
 
 
 inline char *i2a(int i, char *buffer){
@@ -17,7 +17,7 @@ inline char *i2a(int i, char *buffer){
 
 
 int main(int argc, char *argv[]){
-	MemHashMapBucket *b = new MemHashMapBucket();
+	ArrayMap *b = new ArrayMap();
 
 	char buffer[100];
 	unsigned int i;
@@ -56,8 +56,8 @@ int main(int argc, char *argv[]){
 	b->printPairs(30);
 
 	printf("\nSizes:\n");
-	printf("sizeof(MemHashMapBucket  ) : %10lu\n", sizeof(MemHashMapBucket) );
-	printf("sizeof(MemHashMapBucket *) : %10lu\n", sizeof(MemHashMapBucket *) );
+	printf("sizeof(ArrayMap  ) : %10lu\n", sizeof(ArrayMap) );
+	printf("sizeof(ArrayMap *) : %10lu\n", sizeof(ArrayMap *) );
 
 	delete b;
 }

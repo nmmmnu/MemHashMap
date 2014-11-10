@@ -3,7 +3,7 @@ LINK = gcc -lstdc++ -o
 
 
 
-all: test_IHash test_Pair test_MemHashMapBucket test_MemHashMap
+all: test_IHash test_Pair test_ArrayMap test_MemHashMap
 
 
 
@@ -22,7 +22,6 @@ DJBHash.o: DJBHash.cc DJBHash.h IHash.h
 	$(CC) DJBHash.cc
 
 
-
 test_Pair: test_Pair.o Pair.o
 	$(LINK) test_Pair test_Pair.o Pair.o
 
@@ -34,24 +33,24 @@ Pair.o: Pair.cc Pair.h
 
 
 
-test_MemHashMapBucket: test_MemHashMapBucket.o MemHashMapBucket.o Pair.o
-	$(LINK) test_MemHashMapBucket test_MemHashMapBucket.o MemHashMapBucket.o Pair.o
+test_ArrayMap: test_ArrayMap.o ArrayMap.o Pair.o
+	$(LINK) test_ArrayMap test_ArrayMap.o ArrayMap.o Pair.o
 
-test_MemHashMapBucket.o: test_MemHashMapBucket.cc MemHashMapBucket.h
-	$(CC) test_MemHashMapBucket.cc
+test_ArrayMap.o: test_ArrayMap.cc ArrayMap.h
+	$(CC) test_ArrayMap.cc
 
-MemHashMapBucket.o: MemHashMapBucket.cc MemHashMapBucket.h Pair.h
-	$(CC) MemHashMapBucket.cc
+ArrayMap.o: ArrayMap.cc ArrayMap.h Pair.h
+	$(CC) ArrayMap.cc
 
 
 
-test_MemHashMap: test_MemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
-	$(LINK) test_MemHashMap test_MemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
+test_MemHashMap: test_MemHashMap.o MemHashMap.o ArrayMap.o Pair.o DJBHash.o
+	$(LINK) test_MemHashMap test_MemHashMap.o MemHashMap.o ArrayMap.o Pair.o DJBHash.o
 
 test_MemHashMap.o: test_MemHashMap.cc MemHashMap.h IHash.h DJBHash.h
 	$(CC) test_MemHashMap.cc
 
-MemHashMap.o: MemHashMap.cc MemHashMap.h MemHashMapBucket.h Pair.h IHash.h
+MemHashMap.o: MemHashMap.cc MemHashMap.h ArrayMap.h Pair.h IHash.h
 	$(CC) MemHashMap.cc
 
 

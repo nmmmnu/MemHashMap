@@ -1,10 +1,10 @@
-#ifndef _MEMHASHMAPBUCKET_H_
-#define _MEMHASHMAPBUCKET_H_
+#ifndef _ARRAYMAP_H
+#define _ARRAYMAP_H
 
 #include "Pair.h"
 
 
-class MemHashMapBucket {
+class ArrayMap {
 private:
 	unsigned int _count;
 	Pair **_pairs; // array of Pair*
@@ -21,7 +21,7 @@ public: /* for now */
 	void printPairs(const unsigned int cnt = 0);
 
 private:
-	unsigned int getPairID(const char *key);
+	unsigned int _getPairID(const char *key);
 };
 
 

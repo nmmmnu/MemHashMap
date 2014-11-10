@@ -5,6 +5,6 @@ x.c*
 
 test_IHash 
 test_Pair
-test_MemHashMapBucket 
+test_ArrayMap
 test_MemHashMap
 

@@ -21,7 +21,7 @@ public:
 	void print(const bool pretty = false);
 
 private:
-	static char *cloneStr(const char *s);
+	static char *_cloneStr(const char *s);
 };
 
 

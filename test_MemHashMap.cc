@@ -13,6 +13,9 @@ inline char *i2a(int i, char *buffer){
 
 #define MAX 1024 * 100
 
+#define TEST_FORMAT "%-20s %s\n"
+
+
 int main(int argc, char *argv[]){
 	char buffer[1024];
 	char buffer2[1024];
@@ -37,8 +40,10 @@ int main(int argc, char *argv[]){
 	hm->remove(keyr);
 
 
-	printf("Test get      %s\n", strcmp(key, value) == 0	? "OK" : "Fail");
-	printf("Test count    %s\n", hm->count() == MAX - 1	? "OK" : "Fail");
+	printf(TEST_FORMAT, "Test get",		strcmp(key, value) == 0		? "OK" : "Fail");
+	printf(TEST_FORMAT, "Test exists",	hm->exists(key)			? "OK" : "Fail");
+	printf(TEST_FORMAT, "Test ! exists",	! hm->exists(keyr)		? "OK" : "Fail");
+	printf(TEST_FORMAT, "Test count",	hm->count() == MAX - 1		? "OK" : "Fail");
 
 	printf("\nPair Contents:\n");
 	printf("key:   %s\n", key);

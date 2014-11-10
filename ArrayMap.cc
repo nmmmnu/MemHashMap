@@ -1,10 +1,10 @@
-#include "MemHashMapBucket.h"
+#include "ArrayMap.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 
 
-unsigned int MemHashMapBucket::getPairID(const char *key){
+unsigned int ArrayMap::_getPairID(const char *key){
 	if (_count == 0)
 		return 0;
 
@@ -21,8 +21,8 @@ unsigned int MemHashMapBucket::getPairID(const char *key){
 }
 
 
-Pair *MemHashMapBucket::getPair(const char *key){
-	unsigned int pos = getPairID(key);
+Pair *ArrayMap::getPair(const char *key){
+	unsigned int pos = _getPairID(key);
 
 	if (pos)
 		return _pairs[pos - 1];
@@ -30,35 +30,36 @@ Pair *MemHashMapBucket::getPair(const char *key){
 	return NULL;
 }
 
-bool MemHashMapBucket::putPair(Pair *newpair){
+
+bool ArrayMap::putPair(Pair *newpair){
 	if (newpair == NULL)
-		return 0;
+		return false;
 
 	if (! newpair->valid())
-		return 0;
+		return false;
 
 	// is bucket empty?
 	if (_count == 0){
 		_pairs = (Pair **)malloc(sizeof(Pair *));
 		if (_pairs == NULL){
 			// error, but pairs were NULL anyway.
-			return 0;
+			return false;
 		}
 
 		_count = 1;
 		_pairs[0] = newpair;
 
-		return 1;
+		return true;
 	}
 
 	// is key already in the bucket?
-	unsigned int pos = getPairID(newpair->key);
+	unsigned int pos = _getPairID(newpair->key);
 
 	if (pos){
 		delete _pairs[pos - 1];
 		_pairs[pos - 1] = newpair;
 
-		return 1;
+		return true;
 	}
 
 	// seems, the bucket is non empty and pair is not in the bucket.
@@ -66,7 +67,7 @@ bool MemHashMapBucket::putPair(Pair *newpair){
 	Pair **relocated_pairs = (Pair **) realloc(_pairs, (_count + 1) * sizeof(Pair *));
 	if (relocated_pairs == NULL) {
 		// error, but pairs are untouched
-		return 0;
+		return false;
 	}
 
 	_pairs = relocated_pairs;
@@ -74,28 +75,28 @@ bool MemHashMapBucket::putPair(Pair *newpair){
 
 	_pairs[_count - 1] = newpair;
 
-	return 1;
+	return true;
 }
 
 
-bool MemHashMapBucket::putPair(const char *key, const char *value){
+bool ArrayMap::putPair(const char *key, const char *value){
 	if (key == NULL || value == NULL)
-		return 0;
+		return false;
 
 	return putPair(new Pair(key, value));
 }
 
 
-bool MemHashMapBucket::removePair(const char *key){
+bool ArrayMap::removePair(const char *key){
 	if (key == NULL)
-		return 0;
+		return false;
 
 	// is key already in the bucket?
-	unsigned int pos = getPairID(key);
+	unsigned int pos = _getPairID(key);
 
 	if (pos == 0){
 		// no problem to remove something that does not exists
-		return 1;
+		return true;
 	}
 
 	delete _pairs[pos - 1];
@@ -103,7 +104,7 @@ bool MemHashMapBucket::removePair(const char *key){
 	if (_count == 1){
 		free(_pairs);
 		_count = 0;
-		return 1;
+		return true;
 	}
 
 	if (pos < _count){
@@ -118,17 +119,17 @@ bool MemHashMapBucket::removePair(const char *key){
 	if (relocated_pairs == NULL) {
 		// error, but pairs are untouched
 		// last one is NULL, but this is relatively OK.
-		return 0;
+		return false;
 	}
 
 	_pairs = relocated_pairs;
 	_count--;
 
-	return 1;
+	return true;
 }
 
 
-unsigned int MemHashMapBucket::getPairCount(){
+unsigned int ArrayMap::getPairCount(){
 	unsigned int cnt = 0;
 
 	unsigned int i;
@@ -143,7 +144,8 @@ unsigned int MemHashMapBucket::getPairCount(){
 	return cnt;
 }
 
-void MemHashMapBucket::printPairs(const unsigned int cnt /* = 0 */){
+
+void ArrayMap::printPairs(const unsigned int cnt /* = 0 */){
 	printf("Pair count: %u\n", _count);
 
 	unsigned int i;

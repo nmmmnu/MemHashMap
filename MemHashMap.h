@@ -1,7 +1,7 @@
 #ifndef _MEMHASHMAP_H_
 #define _MEMHASHMAP_H_
 
-#include "MemHashMapBucket.h"
+#include "ArrayMap.h"
 
 #include "IHash.h"
 
@@ -11,12 +11,14 @@
 class MemHashMap {
 private:
 	unsigned int _capacity;
-	MemHashMapBucket **_buckets; // array of MemHashMapBucket*
+	ArrayMap **_buckets; // array of MemHashMapBucket*
 	IHash *_hash;
 
 public:
 	MemHashMap(unsigned int capacity, IHash *hash);
 	virtual ~MemHashMap();
+
+	virtual unsigned int hash(const char *key);
 
 	int exists(const char *key);
 	const char *get(const char *key);
@@ -25,7 +27,7 @@ public:
 	unsigned int count();
 
 private:
-	MemHashMapBucket *getBucketForKey(const char *key);
+	ArrayMap *_getBucketForKey(const char *key);
 
 };
 
