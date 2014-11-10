@@ -11,9 +11,14 @@ public:
 	Pair(const char *key, const char *value);
 	virtual ~Pair();
 
-	int operator == (const char *s);
+	bool operator == (const char *s);
 
-	int equals(const char *s);
+	bool equals(const char *s);
+
+	int valid();
+
+public:
+	void print(const bool pretty = false);
 
 private:
 	static char *cloneStr(const char *s);

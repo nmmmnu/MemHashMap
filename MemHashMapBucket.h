@@ -6,13 +6,19 @@
 
 class MemHashMapBucket {
 private:
-	unsigned int count;
-	Pair **pairs; // array of Pair*
+	unsigned int _count;
+	Pair **_pairs; // array of Pair*
 
 public:
 	Pair *getPair(const char *key);
-	int putPair(const char *key, const char *value);
+	bool putPair(Pair *pair);
+	bool removePair(const char *key);
 	unsigned int getPairCount();
+
+public: /* for now */
+	bool putPair(const char *key, const char *value);
+
+	void printPairs(const unsigned int cnt = 0);
 
 private:
 	unsigned int getPairID(const char *key);

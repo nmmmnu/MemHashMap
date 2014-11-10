@@ -3,7 +3,8 @@ test
 _ot/
 x.c*
 
-testIHash
-testPair
-testMemHashMapBucket
-testMemHashMap
+test_IHash 
+test_Pair
+test_MemHashMapBucket 
+test_MemHashMap
+

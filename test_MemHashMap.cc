@@ -11,10 +11,11 @@ inline char *i2a(int i, char *buffer){
 
 #define BUCKETS 1024
 
-#define MAX 1024 * 4
+#define MAX 1024 * 100
 
-int main(){
+int main(int argc, char *argv[]){
 	char buffer[1024];
+	char buffer2[1024];
 
 	MemHashMap *hm = new MemHashMap(BUCKETS, new DJBHash());
 
@@ -24,15 +25,20 @@ int main(){
 
 		hm->put(key, key);
 
-		if (i % 1000 == 0)
+		if (i % (MAX / 10) == 0)
 			printf("processed %d\n", i);
 	}
-
 
 	const char *key = i2a(MAX - 5, buffer);
 	const char *value = hm->get(key);
 
-	printf("Test get      %s\n", strcmp(key, value) == 0 ? "OK" : "Fail");
+	const char *keyr = i2a(MAX / 2, buffer2);
+
+	hm->remove(keyr);
+
+
+	printf("Test get      %s\n", strcmp(key, value) == 0	? "OK" : "Fail");
+	printf("Test count    %s\n", hm->count() == MAX - 1	? "OK" : "Fail");
 
 	printf("\nPair Contents:\n");
 	printf("key:   %s\n", key);

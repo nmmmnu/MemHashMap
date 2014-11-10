@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 Pair::Pair(const char *key, const char *value){
@@ -17,6 +18,9 @@ Pair::~Pair(){
 
 
 char *Pair::cloneStr(const char *src){
+	if (src == NULL)
+		return NULL;
+
 	size_t len = strlen(src);
 
 	char *dest = (char *) malloc(len + 1);
@@ -27,13 +31,36 @@ char *Pair::cloneStr(const char *src){
 }
 
 
-int Pair::equals(const char *s){
+bool Pair::equals(const char *s){
 	return ! strcmp(this->key, s);
 };
 
 
-int Pair::operator == (const char *s){
+bool Pair::operator == (const char *s){
 	return equals(s);
 }
 
+// For the moment validity is simple,
+// both key and value must be not NULL.
+int Pair::valid(){
+	return key != NULL && value != NULL;
+}
+
+void Pair::print(const bool pretty /* = 0 */){
+	const char *mask;
+
+	if (pretty){
+		mask =	"key:   %s\n"
+			"value: %s\n";
+	}else{
+		mask = "%-10s = %s\n";
+	}
+
+	if (! valid()){
+		printf(mask, "(INVALID)", "(INVALID)");
+		return;
+	}
+
+	printf(mask, key, value);
+}
 

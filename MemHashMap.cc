@@ -5,30 +5,30 @@
 
 
 MemHashMap::MemHashMap(unsigned int capacity, IHash *hash){
-	this->capacity = capacity;
-	this->hash = hash;
+	_capacity = capacity;
+	_hash = hash;
 
-	buckets = (MemHashMapBucket **) malloc(capacity * sizeof(MemHashMapBucket *));
+	_buckets = (MemHashMapBucket **) malloc(_capacity * sizeof(MemHashMapBucket *));
 
-	if (buckets == NULL){
+	if (_buckets == NULL){
 		printf("Not enought memory...");
 		exit(1);
 	}
 
-	memset(buckets, 0, capacity * sizeof(MemHashMapBucket *));
+	memset(_buckets, 0, _capacity * sizeof(MemHashMapBucket *));
 }
 
 
 MemHashMap::~MemHashMap(){
 	unsigned int i;
-	for(i = 0; i < capacity; i++) {
-		MemHashMapBucket *bucket = buckets[i];
+	for(i = 0; i < _capacity; i++) {
+		MemHashMapBucket *bucket = _buckets[i];
 
 		if (bucket)
 			delete bucket;
 	}
 
-	free(buckets);
+	free(_buckets);
 }
 
 
@@ -36,13 +36,13 @@ MemHashMapBucket *MemHashMap::getBucketForKey(const char *key){
 	if (key == NULL)
 		return NULL;
 
-	unsigned int index = hash->calculate(key) % capacity;
+	unsigned int index = _hash->calculate(key) % _capacity;
 
 	// if bucket is NULL, it is not created yet
-	if (buckets[index] == NULL)
-		buckets[index] = new MemHashMapBucket();
+	if (_buckets[index] == NULL)
+		_buckets[index] = new MemHashMapBucket();
 
-	return buckets[index];
+	return _buckets[index];
 }
 
 
@@ -78,14 +78,14 @@ const char *MemHashMap::get(const char *key){
 
 
 unsigned int MemHashMap::count(){
-	if (capacity == 0)
+	if (_capacity == 0)
 		return 0;
 
 	unsigned int cnt = 0;
 
 	unsigned int i;
-	for(i = 0; i < capacity; i++){
-		MemHashMapBucket *bucket = buckets[i];
+	for(i = 0; i < _capacity; i++){
+		MemHashMapBucket *bucket = _buckets[i];
 
 		if (bucket)
 			cnt = cnt + bucket->getPairCount();
@@ -96,14 +96,21 @@ unsigned int MemHashMap::count(){
 
 
 
-int MemHashMap::put(const char *key, const char *value){
+bool MemHashMap::put(const char *key, const char *value){
 	if (key == NULL || value == NULL)
 		return 0;
 
 	MemHashMapBucket *bucket = getBucketForKey(key);
 
-	return bucket->putPair(key, value);
+	return bucket->putPair(new Pair(key, value));
 }
 
 
+bool MemHashMap::remove(const char *key){
+	if (key == NULL)
+		return 0;
+
+	MemHashMapBucket *bucket = getBucketForKey(key);
+	return bucket->removePair(key);
+}
 

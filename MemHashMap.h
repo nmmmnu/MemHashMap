@@ -10,9 +10,9 @@
 
 class MemHashMap {
 private:
-	unsigned int capacity;
-	MemHashMapBucket **buckets; // array of MemHashMapBucket*
-	IHash *hash;
+	unsigned int _capacity;
+	MemHashMapBucket **_buckets; // array of MemHashMapBucket*
+	IHash *_hash;
 
 public:
 	MemHashMap(unsigned int capacity, IHash *hash);
@@ -20,7 +20,8 @@ public:
 
 	int exists(const char *key);
 	const char *get(const char *key);
-	int put(const char *key, const char *value);
+	bool put(const char *key, const char *value);
+	bool remove(const char *key);
 	unsigned int count();
 
 private:

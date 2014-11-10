@@ -3,53 +3,53 @@ LINK = gcc -lstdc++ -o
 
 
 
-all: testIHash testPair testMemHashMapBucket testMemHashMap
+all: test_IHash test_Pair test_MemHashMapBucket test_MemHashMap
 
 
 
 clean:
-	rm -f *.o test
+	rm -f *.o test_
 
 
 
-testIHash: testIHash.o DJBHash.o
-	$(LINK) testIHash testIHash.o DJBHash.o
+test_IHash: test_IHash.o DJBHash.o
+	$(LINK) test_IHash test_IHash.o DJBHash.o
 
-testIHash.o: testIHash.cc DJBHash.h IHash.h
-	$(CC) testIHash.cc
+test_IHash.o: test_IHash.cc DJBHash.h IHash.h
+	$(CC) test_IHash.cc
 
 DJBHash.o: DJBHash.cc DJBHash.h IHash.h
 	$(CC) DJBHash.cc
 
 
 
-testPair: testPair.o Pair.o
-	$(LINK) testPair testPair.o Pair.o
+test_Pair: test_Pair.o Pair.o
+	$(LINK) test_Pair test_Pair.o Pair.o
 
-testPair.o: testPair.cc Pair.h
-	$(CC) testPair.cc
+test_Pair.o: test_Pair.cc Pair.h
+	$(CC) test_Pair.cc
 
 Pair.o: Pair.cc Pair.h
 	$(CC) Pair.cc
 
 
 
-testMemHashMapBucket: testMemHashMapBucket.o MemHashMapBucket.o Pair.o
-	$(LINK) testMemHashMapBucket testMemHashMapBucket.o MemHashMapBucket.o Pair.o
+test_MemHashMapBucket: test_MemHashMapBucket.o MemHashMapBucket.o Pair.o
+	$(LINK) test_MemHashMapBucket test_MemHashMapBucket.o MemHashMapBucket.o Pair.o
 
-testMemHashMapBucket.o: testMemHashMapBucket.cc MemHashMapBucket.h
-	$(CC) testMemHashMapBucket.cc
+test_MemHashMapBucket.o: test_MemHashMapBucket.cc MemHashMapBucket.h
+	$(CC) test_MemHashMapBucket.cc
 
 MemHashMapBucket.o: MemHashMapBucket.cc MemHashMapBucket.h Pair.h
 	$(CC) MemHashMapBucket.cc
 
 
 
-testMemHashMap: testMemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
-	$(LINK) testMemHashMap testMemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
+test_MemHashMap: test_MemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
+	$(LINK) test_MemHashMap test_MemHashMap.o MemHashMap.o MemHashMapBucket.o Pair.o DJBHash.o
 
-testMemHashMap.o: testMemHashMap.cc MemHashMap.h IHash.h DJBHash.h
-	$(CC) testMemHashMap.cc
+test_MemHashMap.o: test_MemHashMap.cc MemHashMap.h IHash.h DJBHash.h
+	$(CC) test_MemHashMap.cc
 
 MemHashMap.o: MemHashMap.cc MemHashMap.h MemHashMapBucket.h Pair.h IHash.h
 	$(CC) MemHashMap.cc
