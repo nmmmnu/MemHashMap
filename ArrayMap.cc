@@ -58,7 +58,7 @@ bool ArrayMap::put(Pair *newpair){
 	}
 
 	// is key already in the bucket?
-	unsigned int pos = _getPairID(newpair->key);
+	unsigned int pos = _getPairID(newpair->getKey());
 
 	if (pos){
 		delete _pairs[pos - 1];

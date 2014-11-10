@@ -106,7 +106,7 @@ bool MemHashMap::put(Pair *pair){
 	if (! pair->valid() )
 		return 0;
 
-	const char *key = pair->key;
+	const char *key = pair->getKey();
 
 	ArrayMap *bucket = _getBucketForKey(key);
 

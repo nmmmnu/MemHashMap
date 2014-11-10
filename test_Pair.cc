@@ -18,7 +18,7 @@ int main(){
 
 	key[0] = 'M';
 
-	printf(TEST_FORMAT, "Test via strcmp",		strcmp(p->key, KEY) == 0	? "OK" : "Fail"	);
+	printf(TEST_FORMAT, "Test via strcmp",		strcmp(p->getKey(), KEY) == 0	? "OK" : "Fail"	);
 	printf(TEST_FORMAT, "Test via method",		p->equals(KEY)			? "OK" : "Fail"	);
 	printf(TEST_FORMAT, "Test via op == ",		*p == (char *)KEY		? "OK" : "Fail"	);
 

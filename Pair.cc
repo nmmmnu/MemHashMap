@@ -16,6 +16,16 @@ Pair::~Pair(){
 }
 
 
+const char *Pair::getKey() const{
+	return key;
+}
+
+
+const char *Pair::getValue() const{
+	return value;
+}
+
+
 /* static */ char *Pair::_cloneStr(const char *src){
 	if (src == NULL)
 		return NULL;

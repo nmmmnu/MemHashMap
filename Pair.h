@@ -3,13 +3,16 @@
 
 
 class Pair {
-public:
+protected:
 	char *key;
 	char *value;
 
 public:
 	Pair(const char *key, const char *value);
 	virtual ~Pair();
+
+	const char *getKey() const;
+	const char *getValue() const;
 
 	bool operator == (const char *s) const;
 

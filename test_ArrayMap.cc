@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
 	}
 
 	printf("Test getPair      %s\n", *p == key ? "OK" : "Fail");
-	printf("Test getPair      %s\n", strcmp(p->value, val) == 0 ? "OK" : "Fail");
+	printf("Test getPair      %s\n", strcmp(p->getValue(), val) == 0 ? "OK" : "Fail");
 
 	printf("\nList Pairs:\n");
 	b->print(25);
