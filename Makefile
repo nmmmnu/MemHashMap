@@ -39,10 +39,10 @@ ExpiresPair.o: ExpiresPair.cc ExpiresPair.h Pair.h
 test_ArrayMap: test_ArrayMap.o ArrayMap.o Pair.o
 	$(LINK) test_ArrayMap test_ArrayMap.o ArrayMap.o Pair.o
 
-test_ArrayMap.o: test_ArrayMap.cc ArrayMap.h Pair.h
+test_ArrayMap.o: test_ArrayMap.cc ArrayMap.h IMap.h Pair.h
 	$(CC) test_ArrayMap.cc
 
-ArrayMap.o: ArrayMap.cc ArrayMap.h Pair.h
+ArrayMap.o: ArrayMap.cc ArrayMap.h IMap.h Pair.h
 	$(CC) ArrayMap.cc
 
 
@@ -50,10 +50,10 @@ ArrayMap.o: ArrayMap.cc ArrayMap.h Pair.h
 test_MemHashMap: test_MemHashMap.o MemHashMap.o ArrayMap.o Pair.o DJBHash.o
 	$(LINK) test_MemHashMap test_MemHashMap.o MemHashMap.o ArrayMap.o Pair.o DJBHash.o
 
-test_MemHashMap.o: test_MemHashMap.cc MemHashMap.h IHash.h DJBHash.h
+test_MemHashMap.o: test_MemHashMap.cc MemHashMap.h IMap.h IHash.h DJBHash.h
 	$(CC) test_MemHashMap.cc
 
-MemHashMap.o: MemHashMap.cc MemHashMap.h ArrayMap.h Pair.h IHash.h
+MemHashMap.o: MemHashMap.cc MemHashMap.h IMap.h ArrayMap.h Pair.h IHash.h
 	$(CC) MemHashMap.cc
 
 

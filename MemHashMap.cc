@@ -51,19 +51,19 @@ ArrayMap *MemHashMap::_getBucketForKey(const char *key) const{
 }
 
 
-int MemHashMap::exists(const char *key) const{
+bool MemHashMap::exists(const char *key) const{
 	// this is handled by next function too...
 	if (key == NULL)
-		return 0;
+		return false;
 
 	ArrayMap *bucket = _getBucketForKey(key);
 
 	if (bucket == NULL)
-		return 0;
+		return false;
 
-	const Pair *pair = bucket->getPair(key);
+	const Pair *pair = bucket->get(key);
 
-	return pair == NULL ? 0 : 1;
+	return pair != NULL;
 }
 
 
@@ -76,7 +76,7 @@ const Pair *MemHashMap::get(const char *key) const{
 	if (bucket == NULL)
 		return NULL;
 
-	return bucket->getPair(key);
+	return bucket->get(key);
 }
 
 
@@ -91,7 +91,7 @@ unsigned int MemHashMap::count() const{
 		ArrayMap *bucket = _buckets[i];
 
 		if (bucket)
-			cnt = cnt + bucket->getPairCount();
+			cnt = cnt + bucket->count();
 	}
 
 	return cnt;
@@ -110,7 +110,7 @@ bool MemHashMap::put(Pair *pair){
 
 	ArrayMap *bucket = _getBucketForKey(key);
 
-	return bucket->putPair(pair);
+	return bucket->put(pair);
 }
 
 
@@ -119,6 +119,6 @@ bool MemHashMap::remove(const char *key){
 		return 0;
 
 	ArrayMap *bucket = _getBucketForKey(key);
-	return bucket->removePair(key);
+	return bucket->remove(key);
 }
 

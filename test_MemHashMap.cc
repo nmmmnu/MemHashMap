@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 	char buffer[1024];
 	char buffer2[1024];
 
-	MemHashMap *hm = new MemHashMap(BUCKETS, new DJBHash());
+	IMap *hm = new MemHashMap(BUCKETS, new DJBHash());
 
 	int i;
 	for(i = 0; i < MAX; i++){

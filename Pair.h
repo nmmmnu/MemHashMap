@@ -6,8 +6,6 @@ class Pair {
 public:
 	char *key;
 	char *value;
-	unsigned long int created;
-	unsigned long int expires;
 
 public:
 	Pair(const char *key, const char *value);

@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-unsigned int ArrayMap::_getPairID(const char *key){
+unsigned int ArrayMap::_getPairID(const char *key) const{
 	if (_count == 0)
 		return 0;
 
@@ -21,7 +21,7 @@ unsigned int ArrayMap::_getPairID(const char *key){
 }
 
 
-const Pair *ArrayMap::getPair(const char *key){
+const Pair *ArrayMap::get(const char *key) const{
 	unsigned int pos = _getPairID(key);
 
 	if (pos)
@@ -31,7 +31,12 @@ const Pair *ArrayMap::getPair(const char *key){
 }
 
 
-bool ArrayMap::putPair(Pair *newpair){
+bool ArrayMap::exists(const char *key) const{
+	return _getPairID(key) > 0;
+};
+
+
+bool ArrayMap::put(Pair *newpair){
 	if (newpair == NULL)
 		return false;
 
@@ -79,15 +84,7 @@ bool ArrayMap::putPair(Pair *newpair){
 }
 
 
-bool ArrayMap::putPair(const char *key, const char *value){
-	if (key == NULL || value == NULL)
-		return false;
-
-	return putPair(new Pair(key, value));
-}
-
-
-bool ArrayMap::removePair(const char *key){
+bool ArrayMap::remove(const char *key){
 	if (key == NULL)
 		return false;
 
@@ -129,7 +126,7 @@ bool ArrayMap::removePair(const char *key){
 }
 
 
-unsigned int ArrayMap::getPairCount(){
+unsigned int ArrayMap::count() const{
 	unsigned int cnt = 0;
 
 	unsigned int i;
@@ -145,7 +142,7 @@ unsigned int ArrayMap::getPairCount(){
 }
 
 
-void ArrayMap::printPairs(const unsigned int cnt /* = 0 */){
+void ArrayMap::print(const unsigned int cnt /* = 0 */){
 	printf("Pair count: %u\n", _count);
 
 	unsigned int i;

@@ -6,9 +6,9 @@
 
 
 class ExpiresPair : public Pair {
-public:
-	unsigned long int created;
-	unsigned long int expires;
+private:
+	unsigned long int _created;
+	unsigned long int _expires;
 
 public:
 	ExpiresPair(const char *key, const char *value, unsigned long int expires = 0);

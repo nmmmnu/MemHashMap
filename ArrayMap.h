@@ -1,27 +1,28 @@
 #ifndef _ARRAYMAP_H
 #define _ARRAYMAP_H
 
+#include "IMap.h"
 #include "Pair.h"
 
 
-class ArrayMap {
+class ArrayMap : public IMap{
 private:
 	unsigned int _count;
 	Pair **_pairs; // array of Pair*
 
 public:
-	const Pair *getPair(const char *key);
-	bool putPair(Pair *pair);
-	bool removePair(const char *key);
-	unsigned int getPairCount();
+	virtual ~ArrayMap(){};
 
-	void printPairs(const unsigned int cnt = 0);
+	virtual bool exists(const char *key) const;
+	virtual const Pair *get(const char *key) const;
+	virtual bool put(Pair *pair);
+	virtual bool remove(const char *key);
+	virtual unsigned int count() const;
 
-protected: /* to be removed */
-	bool putPair(const char *key, const char *value);
+	void print(const unsigned int cnt = 0);
 
 private:
-	unsigned int _getPairID(const char *key);
+	unsigned int _getPairID(const char *key) const;
 };
 
 

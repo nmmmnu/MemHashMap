@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 	unsigned int i;
 	for(i = 0; i < MAX; i++){
 		char *s = i2a(i, buffer);
-		b->putPair(new Pair(s, s));
+		b->put(new Pair(s, s));
 
 		if (i % (MAX / 10) == 0)
 			printf("Processing %10d\n", i);
@@ -33,16 +33,16 @@ int main(int argc, char *argv[]){
 	const char *val = "hello world";
 
 	// put duplicate
-	b->putPair(new Pair(key, val));
+	b->put(new Pair(key, val));
 
-	b->removePair("0");
-	b->removePair("10");
-	b->removePair("20");
+	b->remove("0");
+	b->remove("10");
+	b->remove("20");
 
-	printf("Test getPairCount %s\n", b->getPairCount() == MAX - 3 ? "OK" : "Fail");
+	printf("Test getPairCount %s\n", b->count() == MAX - 3 ? "OK" : "Fail");
 
 
-	const Pair *p = b->getPair(key);
+	const Pair *p = b->get(key);
 
 	if (p == NULL){
 		printf("NULL returned, halt\n");
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
 	printf("Test getPair      %s\n", strcmp(p->value, val) == 0 ? "OK" : "Fail");
 
 	printf("\nList Pairs:\n");
-	b->printPairs(30);
+	b->print(25);
 
 	printf("\nSizes:\n");
 	printf("sizeof(ArrayMap  ) : %10lu\n", sizeof(ArrayMap) );
